@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { CssBaseline } from '@mui/material';
+import SoundPlayer from './SoundPlayer';
+import dogBarkSound from './sounds/dog-bark.mp3';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// Create a new Audio object with the sound file
+const playSound = new Audio(dogBarkSound);
+
+// Create a functional component to use the useEffect Hook
+function SoundEffectComponent() {
+  // Play the sound effect when the component mounts
+  useEffect(() => {
+    playSound.play();
+  }, []);
+
+  return null; // This component doesn't render any UI
+}
+
+ReactDOM.render(
   <React.StrictMode>
+    <CssBaseline />
     <App />
-  </React.StrictMode>
+    <SoundPlayer />
+    <SoundEffectComponent /> {/* Render the new component */}
+  </React.StrictMode>,
+  document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
